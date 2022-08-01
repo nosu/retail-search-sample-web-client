@@ -23,7 +23,7 @@ A sample web client for [Retail Search](https://cloud.google.com/solutions/retai
 
 ```
 ## Build a container image
-git clone https://github.com/nosu/retail-search-web-client.git
+git clone https://github.com/nosu/retail-search-sample-web-client.git
 cd retail-search-web-client
 gcloud builds submit --tag ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search --project ${projectId}
 
