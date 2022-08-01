@@ -17,7 +17,12 @@ type RetailImage = {
 }
 
 type SearchResult = {
+  query?: string
   totalSize?: number
+  pageToken?: string
+  nextPageToken?: string
+  pageSize?: number
+  offset?: number
 }
 
 export type { Item, SearchResult }
