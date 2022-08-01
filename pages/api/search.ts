@@ -1,17 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Item } from '../../types/common';
 import { protos, SearchServiceClient } from '@google-cloud/retail'
-
-type ResponseBody = {
-  items: Item[]
-}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const placement = "projects/gcp-study-327707/locations/global/catalogs/default_catalog/placements/default_search"
+  const projectId = process.env.PROJECT_ID
+  const catalogName = process.env.CATALOG_NAME
+  const searchServiceName = process.env.SEARCH_SERVICE_NAME
+  const placement = `projects/${projectId}/locations/global/catalogs/${catalogName}/placements/${searchServiceName}`
   const query = req.query;
   const { searchWord } = query;
 

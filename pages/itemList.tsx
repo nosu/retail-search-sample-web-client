@@ -12,12 +12,12 @@ const ItemList: NextPage<ItemListProps> = ({ items }) => {
       {items && Array.isArray(items) && items.map((item) => (
         <Card sx={{ minWidth: 275, mb: 2, display: 'flex' }} key={item.id}>
           <CardActionArea sx={{ display: 'flex', justifyContent: 'flex-start' }} href={item.product.uri} target='_blank'>
-            <CardMedia
+            {item.product.images && (item.product.images.length > 0) && (<CardMedia
               component="img"
               sx={{ width: 151, mr: 2, ml: 2 }}
               image={item.product.images[0].uri}
               alt={item.product.title}
-            />
+            />)}
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
