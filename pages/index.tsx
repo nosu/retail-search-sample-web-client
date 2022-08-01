@@ -1,11 +1,11 @@
-import axios from 'axios'
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import { useState } from 'react'
+import axios from 'axios'
 import ItemList from './itemList'
 import { AppBar, Container, InputAdornment, TextField, Toolbar, Typography } from '@mui/material'
 import { Search } from '@mui/icons-material'
 import { SearchResult } from '../types/common'
-import Head from 'next/head'
 
 const Home: NextPage = () => {
   const [searchWord, setSearchWord] = useState("")
