@@ -11,17 +11,19 @@ export default async function handler(
   const searchServiceName = process.env.SEARCH_SERVICE_NAME
   const placement = `projects/${projectId}/locations/global/catalogs/${catalogName}/placements/${searchServiceName}`
   const query = req.query;
-  const { searchWord } = query;
+  const { searchWord, pageToken } = query;
 
   const client = new SearchServiceClient();
   const searchRequest: protos.google.cloud.retail.v2alpha.ISearchRequest = {
     placement: placement,
     visitorId: 'testVisitorId',
     query: searchWord as string,
-    pageSize: 500,
-    offset: 0,
-    pageToken: ''
+    pageSize: 50,
+    // offset: 0,
+    pageToken: pageToken ? (pageToken as string) : ''
   }
+
+  console.log('searchRequest', searchRequest)
 
   const searchResult = await client.search(searchRequest, {
     autoPaginate: false,
