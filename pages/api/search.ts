@@ -6,12 +6,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const projectId = process.env.PROJECT_ID
-  const catalogName = process.env.CATALOG_NAME
-  const searchServiceName = process.env.SEARCH_SERVICE_NAME
-  const placement = `projects/${projectId}/locations/global/catalogs/${catalogName}/placements/${searchServiceName}`
   const query = req.query;
-  const { searchWord, pageToken } = query;
+  const { searchWord, pageToken, projectId, catalogName, searchServiceName } = query;
+
+  const mergedProjectId = projectId ? projectId : process.env.PROJECT_ID
+  const mergedCatalogName = catalogName ? catalogName : process.env.CATALOG_NAME
+  const mergedSearchServiceName = searchServiceName ? searchServiceName : process.env.SEARCH_SERVICE_NAME
+  const placement = `projects/${mergedProjectId}/locations/global/catalogs/${mergedCatalogName}/placements/${mergedSearchServiceName}`
 
   const client = new SearchServiceClient();
   const searchRequest: protos.google.cloud.retail.v2alpha.ISearchRequest = {
@@ -19,7 +20,6 @@ export default async function handler(
     visitorId: 'testVisitorId',
     query: searchWord as string,
     pageSize: 50,
-    // offset: 0,
     pageToken: pageToken ? (pageToken as string) : ''
   }
 

@@ -25,4 +25,10 @@ type SearchResult = {
   offset?: number
 }
 
-export type { Item, SearchResult }
+type Config = {
+  projectId?: string
+  catalogName?: string
+  searchServiceName?: string
+}
+
+export type { Item, SearchResult, Config }

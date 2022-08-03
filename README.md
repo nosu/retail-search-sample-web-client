@@ -28,5 +28,10 @@ cd retail-search-web-client
 gcloud builds submit --tag ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search --project ${projectId}
 
 ## Deploy the image as Cloud Run instance (Set `PROJECT_ID` environment variable)
-gcloud run deploy --image ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search --project ${projectId} --set-env-vars "PROJECT_ID=${projectId}"
+gcloud run deploy \
+--image ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search \
+--project ${projectId} \
+--set-env-vars "PROJECT_ID=${projectId}" \
+--allow-unauthenticated
+--service-account=${serviceAccount}
 ```
