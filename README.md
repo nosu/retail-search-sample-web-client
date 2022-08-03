@@ -25,8 +25,15 @@ A sample web client for [Retail Search](https://cloud.google.com/solutions/retai
 ## Build a container image
 git clone https://github.com/nosu/retail-search-sample-web-client.git
 cd retail-search-web-client
-gcloud builds submit --tag ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search --project ${projectId}
+gcloud builds submit \
+--tag ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search \
+--project ${projectId}
 
 ## Deploy the image as Cloud Run instance (Set `PROJECT_ID` environment variable)
-gcloud run deploy --image ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search --project ${projectId} --set-env-vars "PROJECT_ID=${projectId}"
+gcloud run deploy retail-search-client \
+--image ${region}.pkg.dev/${projectId}/${repositoryName}/retail-search \
+--project ${projectId} \
+--set-env-vars "PROJECT_ID=${projectId}" \
+--allow-unauthenticated \
+--service-account ${serviceAccount}
 ```
